@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Storage;
+use ZxcvbnPhp\Zxcvbn;
 
 class RegisterController extends Controller
 {
@@ -31,6 +32,7 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
+    public $passwordStrength = 0;
 
     /**
      * Create a new controller instance.
@@ -42,6 +44,12 @@ class RegisterController extends Controller
         $this->middleware('guest');
         
     }
+
+    public function updatedPassword($password)
+	{
+		$zxcvbn = app(ZxcvbnPhp\Zxcvbn::class)->passwordStrength('password', $value);
+		$this->passwordStrength = $zxcvbn['score'];
+	}
 
     /**
      * Get a validator for an incoming registration request.
@@ -57,7 +65,7 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:7', "regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/", 'confirmed'],
         ],
-            ['password.regex' => 'Password must contains atleast 1 upper, 1 lower, 1 numeric and a special charcter']
+            ['password.regex' => 'Password must be a strong password']
         );
     }
 
