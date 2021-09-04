@@ -16,5 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', "Auth\LoginController@showLoginForm");
 
 Auth::routes(['verify' => true]);
+Route::get('/signup_success', "Auth\RegisterController@signup_success")->name('signup_success');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
