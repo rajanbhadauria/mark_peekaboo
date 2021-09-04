@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Support\Facades\Validator;
 
 class ResetPasswordController extends Controller
 {
@@ -20,15 +21,23 @@ class ResetPasswordController extends Controller
     */
 
     use ResetsPasswords;
+    
 
-    protected function validator(array $data)
+    protected function rules()
     {
-        return Validator::make($data, [
-            'password' => ['required', 'string', 'min:7', "regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/", 'confirmed'],
-        ],
-            ['password.regex' => 'Password must be a strong password']
-        );
+        return [
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => ["regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/", 'confirmed']
+        ];
+        
     }
+
+    protected function validationErrorMessages()
+    {
+        return  ['password.regex' => 'Password must be a strong password'];
+    }
+    
 
 
     /**
@@ -36,5 +45,5 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/login'; //RouteServiceProvider::HOME;
 }
