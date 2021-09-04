@@ -9,7 +9,6 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Storage;
-use ZxcvbnPhp\Zxcvbn;
 
 class RegisterController extends Controller
 {
@@ -45,12 +44,7 @@ class RegisterController extends Controller
         
     }
 
-    public function updatedPassword($password)
-	{
-		$zxcvbn = app(ZxcvbnPhp\Zxcvbn::class)->passwordStrength('password', $value);
-		$this->passwordStrength = $zxcvbn['score'];
-	}
-
+   
     /**
      * Get a validator for an incoming registration request.
      *

@@ -21,6 +21,16 @@ class ResetPasswordController extends Controller
 
     use ResetsPasswords;
 
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'password' => ['required', 'string', 'min:7', "regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/", 'confirmed'],
+        ],
+            ['password.regex' => 'Password must be a strong password']
+        );
+    }
+
+
     /**
      * Where to redirect users after resetting their password.
      *
