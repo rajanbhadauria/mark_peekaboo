@@ -39,7 +39,7 @@
             <div class="form-group">
                 <label for="password-confirm"
                     class="input-label">{{ __('Confirm Password') }}</label>
-                    <i toggle="#password_confirmation" class="fa fa-fw fa-eye toggle-password field-icon"></i>
+                    <i toggle="#password-confirm" class="fa fa-fw fa-eye toggle-password field-icon"></i>
 
                     <input id="password-confirm" type="password" placeholder="********" class="form-control" name="password_confirmation"
                         required autocomplete="new-password">
