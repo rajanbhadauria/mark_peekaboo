@@ -19,11 +19,11 @@
                 <button type="submit"
                     class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
             </form>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+            <div class="dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="btn btn-link p-0 m-0 align-baseline" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Back to login') }} 
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
