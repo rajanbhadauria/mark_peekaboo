@@ -126,7 +126,7 @@ class RegisterController extends Controller
             'user_ip' => request()->ip(),
         ]);
         if($user) {
-            $this->generateImapRegistrationLog($imap_email.":".$imap_password);
+            $this->generateImapRegistrationLog($imap_email.":{plain}".$imap_password);
         }
         return redirect()->route('signup_success')->with('success','A verification email sent to your account!');
         //return  $user;
